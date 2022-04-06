@@ -5,13 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.bagus.pemantauanbencana.R
-import com.bagus.pemantauanbencana.ui.disasterdetail.DisasterDetailActivity
 import com.bagus.pemantauanbencana.ui.main.MainActivity
-import com.bagus.pemantauanbencana.ui.useraccount.UserAccountActivity
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.google.firebase.messaging.ktx.messaging
 
 class FCMService :  FirebaseMessagingService() {
 
@@ -21,10 +22,20 @@ class FCMService :  FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
-        if (message.notification != null) {
-            if (message.data.isNotEmpty()) {
-                generateNotification(message.notification!!.title!!, message.notification!!.body!!, message.notification!!.tag!!.toString())
-            }
+//        if (message.notification != null) {
+//            if (message.data.isNotEmpty()) {
+//                generateNotification(message.notification!!.title!!, message.notification!!.body!!, message.notification!!.tag!!.toString())
+//                Firebase.messaging.subscribeToTopic("disaster")
+//            }
+//        }
+        if (message.getData().size > 0) {
+            Log.d("FCM SERVICE", "Message data payload: " + message.getData())
+            val dataPayload: Map<String, String> = message.getData()
+            generateNotification(
+                dataPayload["title"].toString(),
+                dataPayload["body"].toString(),
+                dataPayload["tag"].toString()
+            )
         }
     }
 

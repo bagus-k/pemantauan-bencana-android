@@ -73,12 +73,15 @@ class MainActivity : AppCompatActivity() {
 
         if (extras != null) {
             list.clear()
-            list = intent.getSerializableExtra(FILTER_DISASTER) as ArrayList<String>
-            bundle.putStringArrayList(FILTER_DISASTER, list)
+            if (intent.getSerializableExtra(FILTER_DISASTER) != null) {
+                list = intent.getSerializableExtra(FILTER_DISASTER) as ArrayList<String>
 
-            fragment.arguments = bundle
-            fragmentTransaction.remove(fragment)
-            fragmentTransaction.replace(R.id.frame_container, fragment).commit()
+                bundle.putStringArrayList(FILTER_DISASTER, list)
+
+                fragment.arguments = bundle
+                fragmentTransaction.remove(fragment)
+                fragmentTransaction.replace(R.id.frame_container, fragment).commit()
+            }
         }
     }
 
