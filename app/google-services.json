@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "49660886011",
+    "project_id": "pemantauan-bencana",
+    "storage_bucket": "pemantauan-bencana.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49660886011:android:0f8771345e3ae504bea95e",
+        "android_client_info": {
+          "package_name": "com.bagus.fcmpushnotif"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49660886011-crei97e2lijd4sqhb2lgq5l3pqsq7q0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGSGqcari1UKSDN89KSmovTvw9kbG41WM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49660886011-crei97e2lijd4sqhb2lgq5l3pqsq7q0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49660886011:android:7f8900abaf146927bea95e",
+        "android_client_info": {
+          "package_name": "com.bagus.pemantauanbencana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49660886011-crei97e2lijd4sqhb2lgq5l3pqsq7q0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGSGqcari1UKSDN89KSmovTvw9kbG41WM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49660886011-crei97e2lijd4sqhb2lgq5l3pqsq7q0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
