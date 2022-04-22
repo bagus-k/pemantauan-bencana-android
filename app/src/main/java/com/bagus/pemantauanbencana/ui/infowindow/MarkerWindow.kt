@@ -20,7 +20,7 @@ class MarkerWindow(mapView: MapView, private var item: DisasterEntity):
         val tvProvince = mView.findViewById<TextView>(R.id.tv_province)
         val detailButton = mView.findViewById<Button>(R.id.btn_detail)
 
-        val splitEventDate = this.item.eventdate.split(" ").toTypedArray()
+        val splitEventDate = this.item.eventdate!!.split(" ").toTypedArray()
 
         tvDisaster.text = this.item.disastertype
         tvEventDate.text = splitEventDate[0]

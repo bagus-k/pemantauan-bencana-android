@@ -5,6 +5,10 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+def localPropertiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(localPropertiesFile))
+
 android {
     compileSdk 31
 
@@ -15,6 +19,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField "String", "BASE_URL", localProperties['BASE_URL']
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -22,6 +28,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", localProperties['BASE_URL']
         }
     }
     compileOptions {
@@ -47,6 +54,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
     //retrofit
     implementation "androidx.activity:activity-ktx:1.4.0"

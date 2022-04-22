@@ -2,29 +2,27 @@ package com.bagus.pemantauanbencana.ui.useraccount
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.ExpandableListView
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.bagus.pemantauanbencana.BuildConfig
-import com.bagus.pemantauanbencana.R
 import com.bagus.pemantauanbencana.databinding.ActivityUserAccountBinding
 import com.bagus.pemantauanbencana.ui.loginpage.LoginActivity
 import com.bagus.pemantauanbencana.ui.main.MainActivity
 import com.bagus.pemantauanbencana.viewmodel.PreferencesViewModel
 import com.bagus.pemantauanbencana.viewmodel.PreferencesViewModelFactory
-import com.google.android.material.switchmaterial.SwitchMaterial
-import kotlinx.coroutines.MainScope
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.ktx.messaging
 
 class UserAccountActivity : AppCompatActivity() {
 
@@ -54,15 +52,19 @@ class UserAccountActivity : AppCompatActivity() {
             PreferencesViewModel::class.java
         )
 
-        prefViewModel.getName().observe(this, {
-            name: String ->
+        prefViewModel.getName().observe(this) { name: String ->
             if (name != "NAME") {
                 binding.tvUserName.text = name
                 binding.btnLogin.visibility = View.GONE
                 binding.btnLogout.visibility = View.VISIBLE
             }
-        })
+        }
 
+        prefViewModel.getEmail().observe(this) { email: String ->
+            if (email != "EMAIL") {
+                binding.tvUserEmail.text = email
+            }
+        }
 
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -70,15 +72,47 @@ class UserAccountActivity : AppCompatActivity() {
         }
 
         binding.btnLogout.setOnClickListener {
-            prefViewModel.saveUser("EMAIL", "NAME")
-            val intent = Intent(this, UserAccountActivity::class.java)
-            startActivity(intent)
+            logoutEvent()
         }
 
         binding.tvExit.setOnClickListener {
             exitEvent()
         }
 
+        prefViewModel.getNotificationSetting().observe(this
+        ) { notif: Boolean ->
+            if (notif) {
+                Firebase.messaging.subscribeToTopic("disaster")
+                binding.switchNotification.isChecked = true
+            } else {
+                Firebase.messaging.unsubscribeFromTopic("disaster")
+                binding.switchNotification.isChecked = false
+            }
+        }
+
+        binding.switchNotification.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            prefViewModel.saveNotificationSetting(isChecked)
+        }
+    }
+
+    private fun logoutEvent() {
+        val builder = AlertDialog.Builder(this)
+        val pref = SettingPreferences.getInstance(dataStore)
+        val prefViewModel = ViewModelProvider(this, PreferencesViewModelFactory(pref)).get(
+            PreferencesViewModel::class.java
+        )
+        builder.setTitle("Logout ?")
+        builder.setMessage("Apakah anda ingin Logout sekarang?")
+        builder.setPositiveButton("Ya") { dialog, id ->
+            prefViewModel.saveUser("EMAIL", "NAME")
+            val intent = Intent(this, UserAccountActivity::class.java)
+            startActivity(intent)
+        }
+        builder.setNegativeButton("Tidak") { dialog, id ->
+            dialog.cancel()
+        }
+        val alert = builder.create()
+        alert.show()
     }
 
     private fun showListViewAdapter() {

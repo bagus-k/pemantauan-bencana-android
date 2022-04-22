@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:descendantFocusability="blocksDescendants"
-    android:padding="16dp"
     tools:context=".ui.useraccount.UserAccountActivity">
 
     <ScrollView
@@ -20,6 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             >
 
             <ImageView
@@ -38,12 +38,24 @@
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/img_user"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Your name" />
+
+            <TextView
+                android:id="@+id/tv_user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_user"
+                app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+                tools:text="Your email" />
 
             <Button
                 android:id="@+id/btn_login"
@@ -114,37 +126,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/eListView" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/img_dark_mode"-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginLeft="8dp"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/tv_preference"-->
-<!--                android:src="@drawable/ic_settings_black"/>-->
+            <ImageView
+                android:id="@+id/img_notification"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_preference"
+                android:src="@drawable/ic_settings_black"/>
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_dark_mode"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginLeft="8dp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:text="Dark Mode"-->
-<!--                android:textSize="18sp"-->
-<!--                app:layout_constraintStart_toEndOf="@id/img_dark_mode"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/tv_preference" />-->
+            <TextView
+                android:id="@+id/tv_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:text="Notifikasi Bencana"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/img_notification"
+                app:layout_constraintTop_toBottomOf="@id/tv_preference" />
 
-<!--            <com.google.android.material.switchmaterial.SwitchMaterial-->
-<!--                android:id="@+id/switch_theme"-->
-<!--                android:layout_width="40dp"-->
-<!--                android:layout_height="20dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:textSize="18sp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/tv_preference" />-->
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_notification"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_preference" />
 
             <ImageView
                 android:id="@+id/img_exit"
@@ -153,7 +165,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_preference"
+                app:layout_constraintTop_toBottomOf="@id/img_notification"
                 android:src="@drawable/ic_exit_to_app_black"/>
 
             <TextView
@@ -166,7 +178,7 @@
                 android:text="Keluar"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@id/img_exit"
-                app:layout_constraintTop_toBottomOf="@id/tv_preference" />
+                app:layout_constraintTop_toBottomOf="@id/tv_notification" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

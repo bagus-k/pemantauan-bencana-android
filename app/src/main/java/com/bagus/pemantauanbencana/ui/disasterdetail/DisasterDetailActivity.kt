@@ -3,8 +3,10 @@ package com.bagus.pemantauanbencana.ui.disasterdetail
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -41,16 +43,19 @@ class DisasterDetailActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, factory)[DisasterViewModel::class.java]
         val extras = intent.extras
         val idLogs = extras?.getString(EXTRA_DISASTER)
+        if (idLogs != null) {
+            Log.e("DETAIL", idLogs)
+        }
         val pref = SettingPreferences.getInstance(dataStore)
         val prefViewModel = ViewModelProvider(this, PreferencesViewModelFactory(pref)).get(
             PreferencesViewModel::class.java
         )
 
-        viewModel.getAllDisaster().observe(this, {disaster ->
-            for (item in disaster) {
-                if (item.idLogs == idLogs) {
+        viewModel.getDisasterDetail(idLogs!!).observe(this) { item ->
+//            for (item in disaster) {
+//                if (item.idLogs == idLogs) {
 
-                    supportActionBar?.setTitle(item.disastertype)
+                    supportActionBar?.title = item.disastertype
 
                     if (item.typeid == "DROUGHT") {
                         binding.disasterLogo.setImageResource(R.drawable.drought_high)
@@ -58,7 +63,7 @@ class DisasterDetailActivity : AppCompatActivity() {
                         binding.disasterLogo.setImageResource(R.drawable.earthquake_high)
                     } else if (item.typeid == "FLOOD") {
                         binding.disasterLogo.setImageResource(R.drawable.flood_high)
-                    }else if (item.typeid == "HIGHSURF") {
+                    } else if (item.typeid == "HIGHSURF") {
                         binding.disasterLogo.setImageResource(R.drawable.highsurf_high)
                     } else if (item.typeid == "HIGHWIND") {
                         binding.disasterLogo.setImageResource(R.drawable.highwind_high)
@@ -79,26 +84,31 @@ class DisasterDetailActivity : AppCompatActivity() {
                     binding.tvDisasterProvince.text = item.regencyCity
 
                     if (item.status == "BELUM") {
-                        binding.textContentStatus.background = ContextCompat.getDrawable(this,
+                        binding.textContentStatus.background = ContextCompat.getDrawable(
+                            this,
                             R.drawable.rounded_corner_red
                         )
                     } else if (item.status == "SELESAI") {
-                        binding.textContentStatus.background = ContextCompat.getDrawable(this,
+                        binding.textContentStatus.background = ContextCompat.getDrawable(
+                            this,
                             R.drawable.rounded_corner_green
                         )
                     }
                     binding.textContentStatus.text = item.status
 
                     if (item.level == "RENDAH") {
-                        binding.textContentLevel.background = ContextCompat.getDrawable(this,
+                        binding.textContentLevel.background = ContextCompat.getDrawable(
+                            this,
                             R.drawable.rounded_corner_green
                         )
                     } else if (item.level == "SEDANG") {
-                        binding.textContentLevel.background = ContextCompat.getDrawable(this,
+                        binding.textContentLevel.background = ContextCompat.getDrawable(
+                            this,
                             R.drawable.rounded_corner_yellow
                         )
                     } else if (item.level == "TINGGI") {
-                        binding.textContentLevel.background = ContextCompat.getDrawable(this,
+                        binding.textContentLevel.background = ContextCompat.getDrawable(
+                            this,
                             R.drawable.rounded_corner_red
                         )
                     }
@@ -107,24 +117,36 @@ class DisasterDetailActivity : AppCompatActivity() {
                     binding.textContentCoordinate.text = "${item.latitude} , ${item.longitude}"
                     binding.textContentWeather.text = item.weather
                     binding.textContentArea.text = item.area
+                    binding.tvContentInjuries.text = "${item.minorInjuries} Luka Ringan, ${item.seriousWound} Luka Berat, ${item.missing} Korban Hilang, ${item.dead} Korban Jiwa"
+                    binding.tvContentDamage.text = item.damage
 
-                    val chronologyTextReplace = item.chronology.replace("<br>", "\n")
+                    val chronologyTextReplace = item.chronology?.replace("<br>", "\n")
                     binding.textContentChronology.text = chronologyTextReplace
 
-                    var responseTextReplace = item.response.replace("<br>", "\n")
-                    responseTextReplace = responseTextReplace.replace("<div>","")
-                    responseTextReplace = responseTextReplace.replace("</div>","")
-                    binding.textContentResponse.text = responseTextReplace
-
-                    prefViewModel.getName().observe(this, {
-                            name: String ->
+                    prefViewModel.getName().observe(this) { name: String ->
                         if (name != "NAME") {
-                            //pusdalops
+                            var responseTextReplace = item.response?.replace("<br>", "\n")
+                            responseTextReplace = responseTextReplace?.replace("<div>", "")
+                            responseTextReplace = responseTextReplace?.replace("</div>", "")
+                            binding.textContentResponse.text = responseTextReplace
+                            binding.textContentSource.text = item.source
+                            binding.textContentOperator.text = item.operatorId
+
+                            binding.textResponse.visibility = View.VISIBLE
+                            binding.textContentResponse.visibility = View.VISIBLE
+                            binding.textSource.visibility = View.VISIBLE
+                            binding.textContentSource.visibility = View.VISIBLE
+                            binding.textOperator.visibility = View.VISIBLE
+                            binding.textContentOperator.visibility = View.VISIBLE
                         }
-                    })
+                    }
+
+                    binding.detailShimmer.stopShimmerAnimation()
+                    binding.detailShimmer.visibility = View.GONE
+                    binding.svDisasterDetail.visibility = View.VISIBLE
                 }
-            }
-        })
+//            }
+//        }
 
     }
 
@@ -137,5 +159,15 @@ class DisasterDetailActivity : AppCompatActivity() {
             else -> return super.onOptionsItemSelected(item)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.detailShimmer.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.detailShimmer.stopShimmerAnimation()
     }
 }

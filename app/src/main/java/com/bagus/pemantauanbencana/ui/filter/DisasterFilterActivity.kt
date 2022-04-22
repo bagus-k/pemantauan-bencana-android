@@ -1,23 +1,29 @@
 package com.bagus.pemantauanbencana.ui.filter
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.Navigation.findNavController
+import com.bagus.pemantauanbencana.R
 import com.bagus.pemantauanbencana.databinding.ActivityDisasterFilterBinding
 import com.bagus.pemantauanbencana.ui.main.MainActivity
-import java.util.ArrayList
+import com.google.android.material.slider.RangeSlider
+import com.google.android.material.slider.Slider
 
 class DisasterFilterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDisasterFilterBinding
 
     companion object {
-        const val FILTER_DISASTER = "FILTER_DISASTER"
+        const val FILTER_DISASTER_LIST = "FILTER_DISASTER_LIST"
+        const val FILTER_DISASTER_DAYS = "FILTER_DISASTER_DAYS"
         val list: ArrayList<String> = ArrayList()
         var filter: ArrayList<String> = ArrayList()
+        var filter_days: Int = 30
+        var filterDays: String = ""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +37,14 @@ class DisasterFilterActivity : AppCompatActivity() {
         supportActionBar?.title = "Filter Bencana"
 
         list.clear()
-
         val extras = intent.extras
         if (extras != null) {
             filter =
-                intent.getSerializableExtra(FILTER_DISASTER) as ArrayList<String>
+                intent.getSerializableExtra(FILTER_DISASTER_LIST) as ArrayList<String>
+            filterDays =
+                intent.getSerializableExtra(FILTER_DISASTER_DAYS) as String
+            binding.sliderDaysValue.text = "Tampilkan data selama ${filterDays} hari terakhir"
+            binding.sliderDays.value = filterDays.toFloat()
             if (filter[0] == "0") {
                 setCheckbox(false)
             } else {
@@ -60,6 +69,12 @@ class DisasterFilterActivity : AppCompatActivity() {
             }
         } else {
             setCheckbox(false)
+        }
+
+        binding.sliderDays.addOnChangeListener { slider, value, fromUser ->
+            val mValue = String.format("%.0f", value)
+            binding.sliderDaysValue.text = "Tampilkan data selama ${mValue} hari terakhir"
+//            filter_days = mValue.toInt()
         }
 
         binding.cbSelectAll.setOnClickListener {
@@ -106,13 +121,31 @@ class DisasterFilterActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             if (list.isNotEmpty()) {
-                intent.putExtra(FILTER_DISASTER, list)
+                intent.putExtra(FILTER_DISASTER_LIST, list)
+//                intent
+//                MainActivity
             }
-            else {
-                list.add("0")
-                intent.putExtra(FILTER_DISASTER, list)
-            }
+//            else {
+//                list.add("0")
+//                intent.putExtra(FILTER_DISASTER_LIST, list)
+//            }
+
+
+            intent.putExtra(FILTER_DISASTER_DAYS, filter_days.toString())
             startActivity(intent)
+//            val navController = findNavController(
+//                binding.btnFilter.context as MainActivity,
+//                R.id.nav_host_fragment_activity_main
+//            )
+//
+//            navController.navigate(R.id.navigation_disaster_map)
+
+//            val navController = findNavController(
+//                binding.btnFilter.context as MainActivity,
+//                R.id.nav_host_fragment_activity_main
+//            )
+//            navController.popBackStack()
+//            navController.navigate(R.id.navigation_disaster_map)
         }
     }
 

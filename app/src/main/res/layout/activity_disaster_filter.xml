@@ -23,51 +23,76 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/filter_category"
+                android:id="@+id/filter_days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="Kategori"
+                android:text="Hari terakhir"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="1.0"
+                android:value="30.0"
+                android:stepSize="1.0"
+                android:valueTo="30"
+                android:contentDescription="Filter hari"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_days" />
+
+            <TextView
+                android:id="@+id/slider_days_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                tools:text="Tampilkan data selama hari terakhir"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slider_days" />
+
+            <TextView
+                android:id="@+id/filter_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kategori"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slider_days_value" />
 
             <CheckBox
                 android:id="@+id/cb_select_all"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
+                android:layout_marginTop="30dp"
                 android:button="@null"
                 android:drawableRight="@drawable/my_checkbox"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/row"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/row"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/black"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/filter_category"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/slider_days_value" />
 
             <ImageView
                 android:id="@+id/img_tornado"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="50dp"
                 android:src="@drawable/tornado_high"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/row"
+                app:layout_constraintTop_toTopOf="@id/filter_category"
                 tools:ignore="ContentDescription" />
 
             <CheckBox
                 android:id="@+id/cb_tornado"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="45dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="60dp"
@@ -76,7 +101,7 @@
                 android:text="Angin Puting Beliung"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/img_tornado"
-                app:layout_constraintTop_toTopOf="@id/row" />
+                app:layout_constraintTop_toTopOf="@id/filter_category" />
 
             <ImageView
                 android:id="@+id/img_flood"
@@ -293,7 +318,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/teal_700"
-                android:text="Filter"
+                android:text="Terapkan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cb_volcano" />

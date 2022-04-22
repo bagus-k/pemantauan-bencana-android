@@ -1,6 +1,7 @@
 package com.bagus.pemantauanbencana.ui.pushnotification
 
 import android.app.*
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -8,11 +9,12 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.bagus.pemantauanbencana.R
-import com.bagus.pemantauanbencana.ui.main.MainActivity
+import com.bagus.pemantauanbencana.ui.disasterdetail.DisasterDetailActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.firebase.messaging.ktx.messaging
+
 
 class FCMService :  FirebaseMessagingService() {
 
@@ -34,41 +36,21 @@ class FCMService :  FirebaseMessagingService() {
             generateNotification(
                 dataPayload["title"].toString(),
                 dataPayload["body"].toString(),
-                dataPayload["tag"].toString()
+                dataPayload["id"].toString()
             )
         }
     }
 
-    private fun generateNotification(title: String, message: String, tag: String) {
-
-//        val intent = Intent(this, MainActivity::class.java).apply {
-//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        }
-//
-//        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-//
-//        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-//            .setSmallIcon(R.drawable.ic_stat_onesignal_default)
-//            .setContentTitle(result.payload.title)
-//            .setContentText(result.payload.body)
-//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//            // Set the intent that will fire when the user taps the notification
-//            .setContentIntent(pendingIntent)
-//            .setAutoCancel(true)
-//
-//        with(NotificationManagerCompat.from(this)) {
-//            // notificationId is a unique int for each notification that you must define
-//            notify(22, builder.build())
-//        }
-
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    private fun generateNotification(title: String, message: String, id_logs: String) {
+        val intent = Intent(this, DisasterDetailActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
-//        intent.putExtra(DisasterDetailActivity.EXTRA_DISASTER, tag)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra(DisasterDetailActivity.EXTRA_DISASTER, id_logs)
+        Log.e("FCM SERVICE", id_logs)
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
-//        val pendingIntent = PendingIntent.getActivity(this, 0 , intent, PendingIntent.FLAG_ONE_SHOT)
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, id_logs.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -85,18 +67,14 @@ class FCMService :  FirebaseMessagingService() {
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-//            builder = builder.setContentTitle(title)
-//                .setContentText(message)
-//                .setSmallIcon(R.drawable.bpbd_logo)
-
-//        notificationManager.notify(0,builder.build())
-
         val mNotification: Notification = builder.build()
         mNotification.flags = mNotification.flags or Notification.FLAG_AUTO_CANCEL
 
         mNotification.defaults = mNotification.defaults or Notification.DEFAULT_SOUND
         mNotification.defaults = mNotification.defaults or Notification.DEFAULT_VIBRATE
 
-        notificationManager.notify(0, mNotification)
+//        notificationManager.notify(0, mNotification)
+        notificationManager.notify(CounterNotif.getNotificationID(baseContext), mNotification)
+
     }
 }

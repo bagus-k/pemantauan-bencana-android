@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 
-data class DataResponse(
+data class DisasterDataResponse(
 
 	@field:SerializedName("data")
 	val data: List<DisasterResponse>

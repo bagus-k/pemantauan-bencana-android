@@ -51,6 +51,17 @@ class DisasterAdapter : RecyclerView.Adapter<DisasterAdapter.DisasterViewHolder>
                 tvCity.text = disaster.regencyCity
                 tvEventdate.text = disaster.eventdate
 
+                if (disaster.status == "BELUM") {
+                    tvContentStatus.background = ContextCompat.getDrawable(itemView.context,
+                        R.drawable.rounded_corner_red
+                    )
+                } else if (disaster.status == "SELESAI") {
+                    tvContentStatus.background = ContextCompat.getDrawable(itemView.context,
+                        R.drawable.rounded_corner_green
+                    )
+                }
+                tvContentStatus.text = disaster.status
+
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DisasterDetailActivity::class.java)
                     intent.putExtra(DisasterDetailActivity.EXTRA_DISASTER, disaster.idLogs)

@@ -29,12 +29,12 @@
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/drawable/rounded_corner_white.xml" value="0.125" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/drawable/rounded_corner_yellow.xml" value="0.121875" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_adapter.xml" value="0.10326086956521739" />
-        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_disaster_detail.xml" value="0.34182908545727136" />
-        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_disaster_filter.xml" value="0.18" />
+        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_disaster_detail.xml" value="0.2" />
+        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_disaster_filter.xml" value="0.33" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_disaster_map.xml" value="0.1213768115942029" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_login.xml" value="0.16983695652173914" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_splash_screen.xml" value="0.14628623188405798" />
+        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_splash_screen.xml" value="0.22" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/activity_user_account.xml" value="0.33" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/expandable_chapter_list.xml" value="0.67" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/expandable_topic_list.xml" value="0.2" />
@@ -43,7 +43,8 @@
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/info_window.xml" value="0.4459203036053131" />
-        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/items_disaster.xml" value="0.2" />
+        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/items_disaster.xml" value="0.37721518987341773" />
+        <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/items_disaster_shimmer.xml" value="0.5" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/notification.xml" value="0.22" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/layout/popup_icon.xml" value="0.1105072463768116" />
         <entry key="..\:/Kuliah/Tugas Akhir/PemantauanBencana/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1171875" />
