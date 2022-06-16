@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:backgroundTint="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="16dp"
+    tools:context=".ui.filter.DisasterFilterActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/filter_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Hari terakhir"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="1.0"
+                android:value="30.0"
+                android:stepSize="1.0"
+                android:valueTo="30"
+                android:contentDescription="Filter hari"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_days" />
+
+            <TextView
+                android:id="@+id/slider_days_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                tools:text="Tampilkan data selama hari terakhir"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slider_days" />
+
+            <TextView
+                android:id="@+id/filter_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kategori"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slider_days_value" />
+
+            <CheckBox
+                android:id="@+id/cb_select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/slider_days_value" />
+
+            <ImageView
+                android:id="@+id/img_tornado"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/tornado_high"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/filter_category"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_tornado"
+                android:layout_marginTop="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Angin Puting Beliung"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_tornado"
+                app:layout_constraintTop_toTopOf="@id/filter_category" />
+
+            <ImageView
+                android:id="@+id/img_flood"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/flood_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_tornado"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_flood"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Banjir"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_flood"
+                app:layout_constraintTop_toBottomOf="@+id/cb_tornado" />
+
+            <ImageView
+                android:id="@+id/img_landslide"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/landslide_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_flood"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_landslide"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Tanah Longsor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_landslide"
+                app:layout_constraintTop_toBottomOf="@+id/cb_flood" />
+
+            <ImageView
+                android:id="@+id/img_earthQuake"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/earthquake_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_landslide"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_earthQuake"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Gempa Bumi"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_earthQuake"
+                app:layout_constraintTop_toBottomOf="@+id/cb_landslide" />
+
+            <ImageView
+                android:id="@+id/img_highSurf"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/highsurf_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_earthQuake"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_highSurf"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Tsunami / Gelombang Tinggi"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_highSurf"
+                app:layout_constraintTop_toBottomOf="@+id/cb_earthQuake" />
+
+            <ImageView
+                android:id="@+id/img_drought"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/drought_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_highSurf"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_drought"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Kekeringan"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_drought"
+                app:layout_constraintTop_toBottomOf="@+id/cb_highSurf" />
+
+            <ImageView
+                android:id="@+id/img_wildFire"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/wildfire_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_drought"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_wildFire"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Kebakaran Hutan"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_wildFire"
+                app:layout_constraintTop_toBottomOf="@+id/cb_drought" />
+
+            <ImageView
+                android:id="@+id/img_incident"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/incident_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_wildFire"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_incident"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Kejadian Lain"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_incident"
+                app:layout_constraintTop_toBottomOf="@+id/cb_wildFire" />
+
+            <ImageView
+                android:id="@+id/img_highWind"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/highwind_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_incident"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_highWind"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Angin Kencang"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_highWind"
+                app:layout_constraintTop_toBottomOf="@+id/cb_incident" />
+
+            <ImageView
+                android:id="@+id/img_volcano"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/volcano_high"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_highWind"
+                tools:ignore="ContentDescription" />
+
+            <CheckBox
+                android:id="@+id/cb_volcano"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="60dp"
+                android:button="@null"
+                android:drawableRight="@drawable/my_checkbox"
+                android:text="Letusan Gunung Api"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/img_volcano"
+                app:layout_constraintTop_toBottomOf="@+id/cb_highWind" />
+
+            <Button
+                android:id="@+id/btn_filter"
+                android:layout_marginTop="15dp"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_700"
+                android:text="Terapkan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cb_volcano" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
